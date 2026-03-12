@@ -13,6 +13,33 @@ window.addEventListener('scroll', () => {
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
+// ===== Portfolio Tab Toggle =====
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.portfolio-tab-content');
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Remove active from all tabs and content
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => {
+            c.classList.remove('active');
+            c.style.display = 'none';
+        });
+        
+        // Activate clicked tab
+        btn.classList.add('active');
+        const tabId = 'tab-' + btn.dataset.tab;
+        const activeContent = document.getElementById(tabId);
+        if (activeContent) {
+            activeContent.style.display = 'block';
+            activeContent.classList.add('active');
+        }
+    });
+});
+
 mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     mobileMenuBtn.classList.toggle('active');
